@@ -26,6 +26,9 @@ public class TelaInicial extends JFrame {
 	private JTextField tfCursoCod;
 	private JTextField tfCursoNome;
 	private JTextField tfCursoArea;
+	private JTextField tfInscricaoCpfProfessor;
+	private JTextField tfInscricaoCodDisciplina;
+	private JTextField tfInscricaoCodProcesso;
 	//private JTextArea taDisciplina;
 
 	/**
@@ -194,22 +197,22 @@ public class TelaInicial extends JFrame {
 		tfCursoArea.setColumns(10);
 		
 		JButton btnCursoCadastrar = new JButton("Cadastrar");
-		btnCursoCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
+		btnCursoCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnCursoCadastrar.setBounds(458, 15, 117, 25);
 		tabCurso.add(btnCursoCadastrar);
 		
 		JButton btnCursoAtualizar = new JButton("Atualizar");
-		btnCursoAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
+		btnCursoAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnCursoAtualizar.setBounds(458, 45, 117, 25);
 		tabCurso.add(btnCursoAtualizar);
 		
 		JButton btnCursoRemover = new JButton("Remover");
-		btnCursoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
+		btnCursoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnCursoRemover.setBounds(458, 75, 117, 25);
 		tabCurso.add(btnCursoRemover);
 		
 		JButton btnCursoPesquisar = new JButton("Pesquisar");
-		btnCursoPesquisar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
+		btnCursoPesquisar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnCursoPesquisar.setBounds(458, 105, 117, 25);
 		tabCurso.add(btnCursoPesquisar);
 		
@@ -219,6 +222,60 @@ public class TelaInicial extends JFrame {
 		
 		JTextArea taCurso = new JTextArea();
 		scrollPane_1.setViewportView(taCurso);
+		
+		JPanel tabInscricao = new JPanel();
+		tabbedPane.addTab("Inscrição", null, tabInscricao, "Cadastrar inscrição");
+		tabInscricao.setLayout(null);
+		
+		JLabel lblCpfDoProfessor = new JLabel("CPF do professor: ");
+		lblCpfDoProfessor.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblCpfDoProfessor.setBounds(12, 15, 200, 25);
+		tabInscricao.add(lblCpfDoProfessor);
+		
+		JLabel lblCdigoDaDisciplina = new JLabel("Código da disciplina");
+		lblCdigoDaDisciplina.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblCdigoDaDisciplina.setBounds(12, 45, 200, 25);
+		tabInscricao.add(lblCdigoDaDisciplina);
+		
+		JLabel lblCdigoDeProcesso = new JLabel("Código de processo:");
+		lblCdigoDeProcesso.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblCdigoDeProcesso.setBounds(12, 75, 200, 25);
+		tabInscricao.add(lblCdigoDeProcesso);
+		
+		tfInscricaoCpfProfessor = new JTextField();
+		tfInscricaoCpfProfessor.setBounds(234, 15, 150, 25);
+		tabInscricao.add(tfInscricaoCpfProfessor);
+		tfInscricaoCpfProfessor.setColumns(10);
+		
+		tfInscricaoCodDisciplina = new JTextField();
+		tfInscricaoCodDisciplina.setBounds(234, 45, 150, 25);
+		tabInscricao.add(tfInscricaoCodDisciplina);
+		tfInscricaoCodDisciplina.setColumns(10);
+		
+		tfInscricaoCodProcesso = new JTextField();
+		tfInscricaoCodProcesso.setBounds(234, 75, 150, 25);
+		tabInscricao.add(tfInscricaoCodProcesso);
+		tfInscricaoCodProcesso.setColumns(10);
+		
+		JButton btnInscricaoCadastrar = new JButton("Cadastrar");
+		btnInscricaoCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnInscricaoCadastrar.setBounds(458, 15, 117, 25);
+		tabInscricao.add(btnInscricaoCadastrar);
+		
+		JButton btnInscricaoAtualizar = new JButton("Atualizar");
+		btnInscricaoAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnInscricaoAtualizar.setBounds(458, 45, 117, 25);
+		tabInscricao.add(btnInscricaoAtualizar);
+		
+		JButton btnInscricaoBuscar = new JButton("Buscar");
+		btnInscricaoBuscar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnInscricaoBuscar.setBounds(458, 75, 117, 25);
+		tabInscricao.add(btnInscricaoBuscar);
+		
+		JButton btnInscricaoRemover = new JButton("Remover");
+		btnInscricaoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnInscricaoRemover.setBounds(458, 105, 117, 25);
+		tabInscricao.add(btnInscricaoRemover);
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
 	}
