@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaInicial extends JFrame {
 
@@ -140,7 +142,7 @@ public class TelaInicial extends JFrame {
 		
 		JButton btnDisciplinaBuscar = new JButton("Buscar");
 		btnDisciplinaBuscar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaBuscar.setBounds(424, 61, 117, 25);
+		btnDisciplinaBuscar.setBounds(424, 134, 117, 25);
 		tabDisciplina.add(btnDisciplinaBuscar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -151,14 +153,24 @@ public class TelaInicial extends JFrame {
 		scrollPane.setViewportView(taDisciplina);
 		taDisciplina.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		
-		//tab professor
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Professor", null, panel, null);
 		
-		//instancia das classes
 		
 		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
+		
+		JButton btnDisciplinaAtulizar = new JButton("Atualizar");
+		btnDisciplinaAtulizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDisciplinaAtulizar.setBounds(424, 51, 117, 25);
+		tabDisciplina.add(btnDisciplinaAtulizar);
+		
+		JButton btnDisciplinaRemover = new JButton("Remover");
+		btnDisciplinaRemover.setBounds(424, 88, 117, 25);
+		tabDisciplina.add(btnDisciplinaRemover);
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
 		
