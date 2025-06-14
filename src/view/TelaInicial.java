@@ -161,6 +161,10 @@ public class TelaInicial extends JFrame {
 		
 		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
 		
+		JButton btnDisciplinaRemover = new JButton("Remover");
+		btnDisciplinaRemover.setBounds(424, 104, 117, 25);
+		tabDisciplina.add(btnDisciplinaRemover);
+		
 		JPanel tabCurso = new JPanel();
 		tabbedPane.addTab("Curso", null, tabCurso, "Cadastro de curso");
 		tabCurso.setLayout(null);
@@ -192,9 +196,28 @@ public class TelaInicial extends JFrame {
 		tabCurso.add(tfCursoArea);
 		tfCursoArea.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(458, 15, 117, 25);
-		tabCurso.add(btnNewButton);
+		JButton btnCursoCadastrar = new JButton("Cadastrar");
+		btnCursoCadastrar.setBounds(458, 15, 117, 25);
+		tabCurso.add(btnCursoCadastrar);
+		
+		JButton btnCursoAtualizar = new JButton("Atualizar");
+		btnCursoAtualizar.setBounds(458, 45, 117, 25);
+		tabCurso.add(btnCursoAtualizar);
+		
+		JButton btnCursoRemover = new JButton("Remover");
+		btnCursoRemover.setBounds(458, 75, 117, 25);
+		tabCurso.add(btnCursoRemover);
+		
+		JButton btnCursoPesquisar = new JButton("Pesquisar");
+		btnCursoPesquisar.setBounds(458, 105, 117, 25);
+		tabCurso.add(btnCursoPesquisar);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 141, 587, 263);
+		tabCurso.add(scrollPane_1);
+		
+		JTextArea taCurso = new JTextArea();
+		scrollPane_1.setViewportView(taCurso);
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
 		

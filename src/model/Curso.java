@@ -7,6 +7,6 @@ public class Curso {
 	
 	@Override
 	public String toString() {
-		return "Curso [cod=" + cod + ", nome=" + nome + ", area=" + area + "]";
+		return cod+";"+nome+";"+area+";";
 	}
 }
