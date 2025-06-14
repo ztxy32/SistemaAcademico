@@ -1,9 +1,9 @@
 package model;
 
 public class Curso {
-	String cod;
-	String nome;
-	String area;
+	public String cod;
+	public String nome;
+	public String area;
 	
 	@Override
 	public String toString() {

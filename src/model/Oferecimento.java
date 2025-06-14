@@ -1,7 +1,13 @@
 package model;
 
 public class Oferecimento {
-	String codigoProcesso;
-	Disciplina disciplina;
-	boolean ativo;
+	public String codigoProcesso;
+	public String disciplina;
+	public boolean ativo;
+	
+	@Override
+	public String toString() {
+		return codigoProcesso + ";" + disciplina + ";" + ativo+ ";";
+	}
+	
 }

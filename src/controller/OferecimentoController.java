@@ -1,5 +1,9 @@
 package controller;
 
-public class OferecimentoController {
+import javax.swing.JTextField;
 
+public class OferecimentoController {
+	private JTextField codigoProcesso;
+	private JTextField disciplina;
+	private JTextField ativo;
 }

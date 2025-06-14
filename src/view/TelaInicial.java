@@ -1,13 +1,10 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controller.DisciplinaController;
-
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -63,8 +60,6 @@ public class TelaInicial extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 0, 616, 443);
 		contentPane.add(tabbedPane);
-		
-		//tab disciplina
 		
 		JPanel tabDisciplina = new JPanel();
 		tabbedPane.addTab("Disciplina", null, tabDisciplina, "Cadastro de disciplina");
@@ -154,14 +149,13 @@ public class TelaInicial extends JFrame {
 		scrollPane.setViewportView(taDisciplina);
 		taDisciplina.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		
-		//tab professor
-		
 		JPanel tabProfessor = new JPanel();
 		tabbedPane.addTab("Professor", null, tabProfessor, "Cadastro de professor");
 		
 		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
 		
 		JButton btnDisciplinaRemover = new JButton("Remover");
+		btnDisciplinaRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnDisciplinaRemover.setBounds(424, 104, 117, 25);
 		tabDisciplina.add(btnDisciplinaRemover);
 		
@@ -227,6 +221,5 @@ public class TelaInicial extends JFrame {
 		scrollPane_1.setViewportView(taCurso);
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
-		
 	}
 }

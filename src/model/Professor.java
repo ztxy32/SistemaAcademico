@@ -1,10 +1,10 @@
 package model;
 
 public class Professor {
-	String cpf;
-	String nome;
-	String area;
-	float pontos;
+	public String cpf;
+	public String nome;
+	public String area;
+	public float pontos;
 	
 	@Override
 	public String toString() {
