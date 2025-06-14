@@ -170,14 +170,17 @@ public class TelaInicial extends JFrame {
 		tabCurso.setLayout(null);
 		
 		JLabel lblCursoCod = new JLabel("Código do curso:");
+		lblCursoCod.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblCursoCod.setBounds(12, 15, 200, 25);
 		tabCurso.add(lblCursoCod);
 		
 		JLabel lblCursoNome = new JLabel("Nome: ");
+		lblCursoNome.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblCursoNome.setBounds(12, 45, 200, 25);
 		tabCurso.add(lblCursoNome);
 		
 		JLabel lblCursoArea = new JLabel("Area: ");
+		lblCursoArea.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblCursoArea.setBounds(12, 75, 200, 25);
 		tabCurso.add(lblCursoArea);
 		
@@ -197,18 +200,22 @@ public class TelaInicial extends JFrame {
 		tfCursoArea.setColumns(10);
 		
 		JButton btnCursoCadastrar = new JButton("Cadastrar");
+		btnCursoCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
 		btnCursoCadastrar.setBounds(458, 15, 117, 25);
 		tabCurso.add(btnCursoCadastrar);
 		
 		JButton btnCursoAtualizar = new JButton("Atualizar");
+		btnCursoAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
 		btnCursoAtualizar.setBounds(458, 45, 117, 25);
 		tabCurso.add(btnCursoAtualizar);
 		
 		JButton btnCursoRemover = new JButton("Remover");
+		btnCursoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
 		btnCursoRemover.setBounds(458, 75, 117, 25);
 		tabCurso.add(btnCursoRemover);
 		
 		JButton btnCursoPesquisar = new JButton("Pesquisar");
+		btnCursoPesquisar.setFont(new Font("Adwaita Sans", Font.BOLD, 12));
 		btnCursoPesquisar.setBounds(458, 105, 117, 25);
 		tabCurso.add(btnCursoPesquisar);
 		
