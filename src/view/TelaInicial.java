@@ -26,6 +26,9 @@ public class TelaInicial extends JFrame {
 	private JTextField tfDisciplinaHorarioInicial;
 	private JTextField tfDisciplinaQtHoras;
 	private JTextField tfDisciplinaCurso;
+	private JTextField tfCursoCod;
+	private JTextField tfCursoNome;
+	private JTextField tfCursoArea;
 	//private JTextArea taDisciplina;
 
 	/**
@@ -153,12 +156,45 @@ public class TelaInicial extends JFrame {
 		
 		//tab professor
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("Professor", null, panel, null);
-		
-		//instancia das classes
+		JPanel tabProfessor = new JPanel();
+		tabbedPane.addTab("Professor", null, tabProfessor, "Cadastro de professor");
 		
 		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
+		
+		JPanel tabCurso = new JPanel();
+		tabbedPane.addTab("Curso", null, tabCurso, "Cadastro de curso");
+		tabCurso.setLayout(null);
+		
+		JLabel lblCursoCod = new JLabel("Código do curso:");
+		lblCursoCod.setBounds(12, 15, 200, 25);
+		tabCurso.add(lblCursoCod);
+		
+		JLabel lblCursoNome = new JLabel("Nome: ");
+		lblCursoNome.setBounds(12, 45, 200, 25);
+		tabCurso.add(lblCursoNome);
+		
+		JLabel lblCursoArea = new JLabel("Area: ");
+		lblCursoArea.setBounds(12, 75, 200, 25);
+		tabCurso.add(lblCursoArea);
+		
+		tfCursoCod = new JTextField();
+		tfCursoCod.setBounds(234, 15, 150, 25);
+		tabCurso.add(tfCursoCod);
+		tfCursoCod.setColumns(10);
+		
+		tfCursoNome = new JTextField();
+		tfCursoNome.setBounds(234, 45, 150, 25);
+		tabCurso.add(tfCursoNome);
+		tfCursoNome.setColumns(10);
+		
+		tfCursoArea = new JTextField();
+		tfCursoArea.setBounds(234, 75, 150, 25);
+		tabCurso.add(tfCursoArea);
+		tfCursoArea.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(458, 15, 117, 25);
+		tabCurso.add(btnNewButton);
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
 		
