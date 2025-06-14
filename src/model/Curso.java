@@ -1,7 +1,7 @@
 package model;
 
 public class Curso {
-	public String cod;
+	public int cod;
 	public String nome;
 	public String area;
 	
