@@ -34,6 +34,10 @@ public class TelaInicial extends JFrame {
 	private JTextField tfInscricaoCpfProfessor;
 	private JTextField tfInscricaoCodDisciplina;
 	private JTextField tfInscricaoCodProcesso;
+	private JTextField tfProfessorCpf;
+	private JTextField tfProfessorNome;
+	private JTextField tfProfessorArea;
+	private JTextField tfProfessorPontos;
 
 	/**
 	 * Launch the application.
@@ -158,6 +162,67 @@ public class TelaInicial extends JFrame {
 		
 		JPanel tabProfessor = new JPanel();
 		tabbedPane.addTab("Professor", null, tabProfessor, "Cadastro de professor");
+		tabProfessor.setLayout(null);
+		
+		JLabel lblProfessorCpf = new JLabel("CPF: ");
+		lblProfessorCpf.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblProfessorCpf.setBounds(12, 15, 70, 15);
+		tabProfessor.add(lblProfessorCpf);
+		
+		JLabel lblProfessorNome = new JLabel("Nome: ");
+		lblProfessorNome.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblProfessorNome.setBounds(12, 45, 70, 15);
+		tabProfessor.add(lblProfessorNome);
+		
+		JLabel lblProfessorArea = new JLabel("Area: ");
+		lblProfessorArea.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblProfessorArea.setBounds(12, 75, 70, 15);
+		tabProfessor.add(lblProfessorArea);
+		
+		JLabel lblProfessorPontos = new JLabel("Pontos: ");
+		lblProfessorPontos.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		lblProfessorPontos.setBounds(12, 105, 70, 15);
+		tabProfessor.add(lblProfessorPontos);
+		
+		tfProfessorCpf = new JTextField();
+		tfProfessorCpf.setBounds(234, 15, 150, 25);
+		tabProfessor.add(tfProfessorCpf);
+		tfProfessorCpf.setColumns(10);
+		
+		tfProfessorNome = new JTextField();
+		tfProfessorNome.setBounds(234, 45, 150, 25);
+		tabProfessor.add(tfProfessorNome);
+		tfProfessorNome.setColumns(10);
+		
+		tfProfessorArea = new JTextField();
+		tfProfessorArea.setBounds(234, 75, 150, 25);
+		tabProfessor.add(tfProfessorArea);
+		tfProfessorArea.setColumns(10);
+		
+		tfProfessorPontos = new JTextField();
+		tfProfessorPontos.setBounds(234, 105, 150, 25);
+		tabProfessor.add(tfProfessorPontos);
+		tfProfessorPontos.setColumns(10);
+		
+		JButton btnProfessorCadastrar = new JButton("Cadastrar");
+		btnProfessorCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnProfessorCadastrar.setBounds(458, 15, 117, 25);
+		tabProfessor.add(btnProfessorCadastrar);
+		
+		JButton btnProfessorAtualizar = new JButton("Atualizar");
+		btnProfessorAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnProfessorAtualizar.setBounds(458, 45, 117, 25);
+		tabProfessor.add(btnProfessorAtualizar);
+		
+		JButton btnProfessorBuscar = new JButton("Buscar");
+		btnProfessorBuscar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnProfessorBuscar.setBounds(458, 75, 117, 25);
+		tabProfessor.add(btnProfessorBuscar);
+		
+		JButton btnProfessorRemover = new JButton("Remover");
+		btnProfessorRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnProfessorRemover.setBounds(458, 105, 117, 25);
+		tabProfessor.add(btnProfessorRemover);
 		
 		JButton btnDisciplinaRemover = new JButton("Remover");
 		btnDisciplinaRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
