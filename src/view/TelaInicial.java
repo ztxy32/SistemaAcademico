@@ -4,7 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.CursoController;
 import controller.DisciplinaController;
+import controller.InscricaoController;
+import controller.ProfessorController;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,7 +34,6 @@ public class TelaInicial extends JFrame {
 	private JTextField tfInscricaoCpfProfessor;
 	private JTextField tfInscricaoCodDisciplina;
 	private JTextField tfInscricaoCodProcesso;
-	//private JTextArea taDisciplina;
 
 	/**
 	 * Launch the application.
@@ -155,8 +159,6 @@ public class TelaInicial extends JFrame {
 		JPanel tabProfessor = new JPanel();
 		tabbedPane.addTab("Professor", null, tabProfessor, "Cadastro de professor");
 		
-		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
-		
 		JButton btnDisciplinaRemover = new JButton("Remover");
 		btnDisciplinaRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnDisciplinaRemover.setBounds(424, 104, 117, 25);
@@ -211,7 +213,7 @@ public class TelaInicial extends JFrame {
 		btnCursoRemover.setBounds(458, 75, 117, 25);
 		tabCurso.add(btnCursoRemover);
 		
-		JButton btnCursoPesquisar = new JButton("Pesquisar");
+		JButton btnCursoPesquisar = new JButton("Buscar");
 		btnCursoPesquisar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnCursoPesquisar.setBounds(458, 105, 117, 25);
 		tabCurso.add(btnCursoPesquisar);
@@ -276,7 +278,24 @@ public class TelaInicial extends JFrame {
 		btnInscricaoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnInscricaoRemover.setBounds(458, 105, 117, 25);
 		tabInscricao.add(btnInscricaoRemover);
+		
+		DisciplinaController disciplinaController = new DisciplinaController(
+				tfDisciplinaCod, 
+				tfDisciplinNome, 
+				tfDisciplinaDiaSemana, 
+				tfDisciplinaHorarioInicial, 
+				tfDisciplinaQtHoras, 
+				tfDisciplinaCurso, 
+				taDisciplina
+			);
+			//ProfessorController professorController = new ProfessorController(tfProfessorCpf, tfProfessorNome, tfProfessorArea, tfProfessorPontos);
+			CursoController cursoController = new CursoController(tfCursoCod, tfCursoNome, tfCursoArea);
+			InscricaoController inscricaoController = new InscricaoController(tfInscricaoCpfProfessor, tfInscricaoCodDisciplina, tfInscricaoCodProcesso);
+			
+		
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
+		btnInscricaoCadastrar.addActionListener(inscricaoController);
+		btnCursoCadastrar.addActionListener(cursoController);
 	}
 }
