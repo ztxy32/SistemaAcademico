@@ -66,7 +66,7 @@ public class DisciplinaController implements ActionListener{
 	private void busca() throws IOException {
 		Disciplina disciplina = new Disciplina();
 		
-		disciplina.cod = tfDisciplinaCod.getText();
+		disciplina.cod = Integer.parseInt(tfDisciplinaCod.getText());
 		
 		disciplina = buscaDisciplina(disciplina);
 		if(disciplina.nome != null) {
@@ -90,7 +90,7 @@ public class DisciplinaController implements ActionListener{
 			
 			while(linha != null) {
 				String[] vetLinha = linha.split(";");
-				if(vetLinha[0].equals(disciplina.cod)) {
+				if(vetLinha[0].equals(String.valueOf(disciplina.cod))) {
 					disciplina.nome = vetLinha[1];
 					break;
 				}
@@ -110,11 +110,11 @@ public class DisciplinaController implements ActionListener{
 		
 		//capturar input
 		
-		disciplina.cod = tfDisciplinaCod.getText();
+		disciplina.cod = Integer.parseInt(tfDisciplinaCod.getText());
 		disciplina.nome = tfDisciplinNome.getText();
-		disciplina.diaSemana = tfDisciplinaDiaSemana.getText();
-		disciplina.horarioInicial = tfDisciplinaHorarioInicial.getText();
-		disciplina.qtHoras = tfDisciplinaQtHoras.getText();
+		disciplina.diaSemana = Integer.parseInt(tfDisciplinaDiaSemana.getText());
+		disciplina.horarioInicial = Integer.parseInt(tfDisciplinaHorarioInicial.getText());
+		disciplina.qtHoras = Integer.parseInt(tfDisciplinaQtHoras.getText());
 		disciplina.curso = tfDisciplinaCurso.getText();
 		
 		handleCadastrarDisciplina(disciplina.toString());
