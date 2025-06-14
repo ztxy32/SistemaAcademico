@@ -5,11 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.DisciplinaController;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class TelaInicial extends JFrame {
 
@@ -21,6 +26,7 @@ public class TelaInicial extends JFrame {
 	private JTextField tfDisciplinaHorarioInicial;
 	private JTextField tfDisciplinaQtHoras;
 	private JTextField tfDisciplinaCurso;
+	//private JTextArea taDisciplina;
 
 	/**
 	 * Launch the application.
@@ -54,6 +60,8 @@ public class TelaInicial extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 0, 616, 443);
 		contentPane.add(tabbedPane);
+		
+		//tab disciplina
 		
 		JPanel tabDisciplina = new JPanel();
 		tabbedPane.addTab("Disciplina", null, tabDisciplina, "Cadastro de disciplina");
@@ -96,31 +104,31 @@ public class TelaInicial extends JFrame {
 		tfDisciplinaCod.setColumns(10);
 		
 		tfDisciplinNome = new JTextField();
-		tfDisciplinaCod.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		tfDisciplinNome.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		tfDisciplinNome.setBounds(186, 47, 120, 20);
 		tabDisciplina.add(tfDisciplinNome);
 		tfDisciplinNome.setColumns(10);
 		
 		tfDisciplinaDiaSemana = new JTextField();
-		tfDisciplinaCod.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		tfDisciplinaDiaSemana.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		tfDisciplinaDiaSemana.setBounds(186, 77, 120, 20);
 		tabDisciplina.add(tfDisciplinaDiaSemana);
 		tfDisciplinaDiaSemana.setColumns(10);
 		
 		tfDisciplinaHorarioInicial = new JTextField();
-		tfDisciplinaCod.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		tfDisciplinaHorarioInicial.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		tfDisciplinaHorarioInicial.setBounds(186, 107, 120, 20);
 		tabDisciplina.add(tfDisciplinaHorarioInicial);
 		tfDisciplinaHorarioInicial.setColumns(10);
 		
 		tfDisciplinaQtHoras = new JTextField();
-		tfDisciplinaCod.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		tfDisciplinaQtHoras.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		tfDisciplinaQtHoras.setBounds(186, 137, 120, 20);
 		tabDisciplina.add(tfDisciplinaQtHoras);
 		tfDisciplinaQtHoras.setColumns(10);
 		
 		tfDisciplinaCurso = new JTextField();
-		tfDisciplinaCod.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		tfDisciplinaCurso.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
 		tfDisciplinaCurso.setBounds(186, 167, 120, 20);
 		tabDisciplina.add(tfDisciplinaCurso);
 		tfDisciplinaCurso.setColumns(10);
@@ -131,13 +139,28 @@ public class TelaInicial extends JFrame {
 		tabDisciplina.add(btnDisciplinaCadastrar);
 		
 		JButton btnDisciplinaBuscar = new JButton("Buscar");
-		btnDisciplinaCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnDisciplinaBuscar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnDisciplinaBuscar.setBounds(424, 61, 117, 25);
 		tabDisciplina.add(btnDisciplinaBuscar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 205, 577, 199);
+		tabDisciplina.add(scrollPane);
+		
+		JTextArea taDisciplina = new JTextArea();
+		scrollPane.setViewportView(taDisciplina);
+		taDisciplina.setFont(new Font("Adwaita Sans", Font.PLAIN, 14));
+		
+		//tab professor
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Professor", null, panel, null);
 		
+		//instancia das classes
+		
+		DisciplinaController disciplinaController = new DisciplinaController(tfDisciplinaCod, tfDisciplinNome, tfDisciplinaDiaSemana, tfDisciplinaHorarioInicial, tfDisciplinaQtHoras, tfDisciplinaCurso, taDisciplina);
+		btnDisciplinaCadastrar.addActionListener(disciplinaController);
+		btnDisciplinaBuscar.addActionListener(disciplinaController);
 		
 	}
 }
