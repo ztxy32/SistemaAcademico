@@ -55,7 +55,7 @@ public class InscricaoController implements ActionListener{
 		if(cmd.equals("Atualizar")) {
 			try {
 				atualizar();
-			}catch(IOException e1) {
+			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -144,9 +144,78 @@ public class InscricaoController implements ActionListener{
 	}
 
 
-	private void atualizar() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void atualizar() throws Exception {
+	    String cpf = tfInscricaoCpfProfessor.getText();
+	    String novoCodDisc = tfInscricaoCodDisciplina.getText();
+	    String novoCodProc = tfInscricaoCodProcesso.getText();
+
+	    if (cpf.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Informe o CPF para atualizar", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "inscricoes.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo de inscrições não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    Lista<Inscricao> listaFinal = new Lista<>();
+	    boolean encontrado = false;
+
+	    String linha = reader.readLine();
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        Inscricao insc = new Inscricao();
+	        insc.cpfProfessor = dados[0];
+	        insc.codDisciplina = dados[1];
+	        insc.codProcesso = dados[2];
+
+	        if (cpf.equals(insc.cpfProfessor)) {
+	            // atualiza os campos
+	            insc.codDisciplina = novoCodDisc;
+	            insc.codProcesso = novoCodProc;
+	            encontrado = true;
+	        }
+
+	        listaFinal.addLast(insc);
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    if (!encontrado) {
+	        JOptionPane.showMessageDialog(null, "O CPF inserido não está cadastrado", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+
+	    int tamanho = listaFinal.size();
+	    for (int i = 0; i < tamanho; i++) {
+	        Inscricao insc = (Inscricao) listaFinal.getPosicao(i);
+	        pw.write(insc.cpfProfessor + ";" + insc.codDisciplina + ";" + insc.codProcesso + ";\r\n");
+	    }
+
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Inscrição atualizada com sucesso!");
+
+	    tfInscricaoCpfProfessor.setText("");
+	    tfInscricaoCodDisciplina.setText("");
+	    tfInscricaoCodProcesso.setText("");
+	    taInscricao.setText("");
 	}
 
 	private void busca() throws Exception{
