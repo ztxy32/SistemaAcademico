@@ -9,11 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Inscricao;
+import model.estrutura.Lista;
 
 public class InscricaoController implements ActionListener{
 	
@@ -44,7 +44,7 @@ public class InscricaoController implements ActionListener{
 		if(cmd.equals("Buscar")) {
 			try {
 				busca();
-			}catch(IOException e1) {
+			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -62,8 +62,7 @@ public class InscricaoController implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
-		
-		
+
 	}
 
 	private void remover() throws IOException{
@@ -76,23 +75,117 @@ public class InscricaoController implements ActionListener{
 		
 	}
 
-	private void busca() throws IOException{
+	private void busca() throws Exception{
 		Inscricao inscricao = new Inscricao();
 		inscricao.cpfProfessor = tfInscricaoCpfProfessor.getText();
+		inscricao.codDisciplina = tfInscricaoCodDisciplina.getText();
+		inscricao.codProcesso = tfInscricaoCodProcesso.getText();
 		
-		inscricao = buscaInscricao(inscricao);
+		Lista<Inscricao> inscricoes = new Lista<>();
 		
-		if(inscricao.cpfProfessor != null) {
-			taInscricao.setText("Cpf professor: "+inscricao.cpfProfessor+" Código da disciplina: "+inscricao.codDisciplina);
+		if(!inscricao.cpfProfessor.equals("")) {
+			inscricao = buscaCpf(inscricao.cpfProfessor);
+			if(inscricao != null) {
+				taInscricao.setText("Cpf professor: "+inscricao.cpfProfessor+" Código da disciplina: "+inscricao.codDisciplina+" Código de processo: "+inscricao.codProcesso);
+			}
+		}else if(!inscricao.codDisciplina.equals("")) {
+			inscricoes = buscaDisciplina(inscricao.codDisciplina);
+		}else if(!inscricao.codProcesso.equals("")) {
+			inscricoes = buscaProcesso(inscricao.codProcesso);
 		}else {
-			taInscricao.setText("Inscrição não encontrada");
+			JOptionPane.showMessageDialog(null, "Preencha um campo", "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
+		
+		
+		int listSize = inscricoes.size();
+		
+		StringBuffer buffer = new StringBuffer();
+		if(listSize > 0) {
+			for(int i = 0; i < listSize; i++) {
+				Inscricao inscr = (Inscricao) inscricoes.getPosicao(i);
+				buffer.append("Cpf professor: "+inscr.cpfProfessor+" Código da disciplina: "+inscr.codDisciplina+" Código de processo: "+inscr.codProcesso+"\r\n");
+			}
+			taInscricao.setText(buffer.toString());
+			
+		}else {
+			JOptionPane.showMessageDialog(null, "Nenhum processo encontrado", "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		tfInscricaoCpfProfessor.setText("");
+		tfInscricaoCodDisciplina.setText("");
+		tfInscricaoCodProcesso.setText("");
 		
 	}
 
-	private Inscricao buscaInscricao(Inscricao inscricao) throws IOException {
+	private Lista<Inscricao> buscaProcesso(String codProcesso) throws IOException{
+		Lista<Inscricao> inscricoes = new Lista<>();
+		
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
-		File arq = new File(path, "inscricao.csv");
+		File arq = new File(path, "inscricoes.csv");
+		
+		if(arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			while(linha != null) {
+				String[] vetLinha = linha.split(";");
+				if(vetLinha[2].equals(codProcesso)) {
+					Inscricao inscricao = new Inscricao();
+					inscricao.cpfProfessor = vetLinha[0];
+					inscricao.codDisciplina = vetLinha[1];
+					inscricao.codProcesso = vetLinha[2];
+					
+					inscricoes.addFirst(inscricao);
+				}
+				linha = buffer.readLine();
+			}
+			
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		return inscricoes;
+	}
+
+	private Lista<Inscricao> buscaDisciplina(String codDisciplina) throws IOException{
+		Lista<Inscricao> inscricoes = new Lista<>();
+		
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "inscricoes.csv");
+		
+		if(arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			while(linha != null) {
+				String[] vetLinha = linha.split(";");
+				if(vetLinha[1].equals(codDisciplina)) {
+					Inscricao inscricao = new Inscricao();
+					inscricao.cpfProfessor = vetLinha[0];
+					inscricao.codDisciplina = vetLinha[1];
+					inscricao.codProcesso = vetLinha[2];
+					
+					inscricoes.addFirst(inscricao);
+				}
+				linha = buffer.readLine();
+			}
+			
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		return inscricoes;
+	}
+
+	private Inscricao buscaCpf(String cpfProfessor) throws IOException{
+		Inscricao inscricao = new Inscricao();
+		
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "inscricoes.csv");
 		
 		if(arq.exists() && arq.isFile()) {
 			FileInputStream fis = new FileInputStream(arq);
@@ -102,9 +195,10 @@ public class InscricaoController implements ActionListener{
 			
 			while(linha != null) {
 				String[] vetLinha = linha.split(";");
-				if(vetLinha[0].equals(inscricao.cpfProfessor)) {
-					inscricao.codDisciplina = Integer.parseInt(vetLinha[1]);
-					inscricao.codProcesso = Integer.parseInt(vetLinha[2]);
+				if(vetLinha[0].equals(cpfProfessor)) {
+					inscricao.cpfProfessor = vetLinha[0];
+					inscricao.codDisciplina = vetLinha[1];
+					inscricao.codProcesso = vetLinha[2];
 					break;
 				}
 				linha = buffer.readLine();
@@ -114,14 +208,17 @@ public class InscricaoController implements ActionListener{
 			isr.close();
 			fis.close();
 		}
+		if(inscricao.cpfProfessor == null) {
+			inscricao = null;
+		}
 		return inscricao;
 	}
 
 	private void cadastro() throws IOException{
 		Inscricao inscricao = new Inscricao();
 		inscricao.cpfProfessor = tfInscricaoCpfProfessor.getText();
-		inscricao.codDisciplina = Integer.parseInt(tfInscricaoCodDisciplina.getText());
-		inscricao.codProcesso = Integer.parseInt(tfInscricaoCodProcesso.getText());
+		inscricao.codDisciplina = tfInscricaoCodDisciplina.getText();
+		inscricao.codProcesso = tfInscricaoCodProcesso.getText();
 		
 		handleCadastrarInscricao(inscricao.toString());
 		
