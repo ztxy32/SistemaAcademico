@@ -3,8 +3,8 @@ package model;
 public class Disciplina {
 	public int cod;
 	public String nome;
-	public int diaSemana;
-	public int horarioInicial;
+	public String diaSemana;
+	public String horarioInicial;
 	public int qtHoras;
 	public String curso;
 	

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -111,8 +112,8 @@ public class DisciplinaController implements ActionListener{
 		
 		disciplina.cod = Integer.parseInt(tfDisciplinaCod.getText());
 		disciplina.nome = tfDisciplinNome.getText();
-		disciplina.diaSemana = Integer.parseInt(tfDisciplinaDiaSemana.getText());
-		disciplina.horarioInicial = Integer.parseInt(tfDisciplinaHorarioInicial.getText());
+		disciplina.diaSemana = tfDisciplinaDiaSemana.getText();
+		disciplina.horarioInicial = tfDisciplinaHorarioInicial.getText();
 		disciplina.qtHoras = Integer.parseInt(tfDisciplinaQtHoras.getText());
 		disciplina.curso = tfDisciplinaCurso.getText();
 		
@@ -151,6 +152,8 @@ public class DisciplinaController implements ActionListener{
 		pw.flush();
 		pw.close();
 		fw.close();
+		
+		JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso!");
 		
 	}
 	
