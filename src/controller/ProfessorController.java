@@ -68,14 +68,132 @@ public class ProfessorController implements ActionListener{
 		
 	}
 
-	private void remover() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void remover() throws IOException {
+	    String cpf = tfProfessorCpf.getText();
+
+	    if (cpf.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Informe o CPF do professor para remover", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "professor.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo de professores não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    StringBuilder sb = new StringBuilder();
+	    String linha = reader.readLine();
+	    boolean removido = false;
+
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        if (!dados[0].equals(cpf)) {
+	            sb.append(linha).append("\r\n");
+	        } else {
+	            removido = true;
+	        }
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    if (!removido) {
+	        JOptionPane.showMessageDialog(null, "Professor não encontrado para remoção.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+	    pw.write(sb.toString());
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Professor removido com sucesso!");
+
+	    tfProfessorCpf.setText("");
+	    tfProfessorNome.setText("");
+	    tfProfessorArea.setText("");
+	    tfProfessorPontos.setText("");
 	}
 
-	private void atualizar() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void atualizar() throws IOException {
+	    String cpf = tfProfessorCpf.getText();
+	    String novoNome = tfProfessorNome.getText();
+	    String novaArea = tfProfessorArea.getText();
+	    String novosPontosStr = tfProfessorPontos.getText();
+
+	    if (cpf.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Informe o CPF do professor para atualizar", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    float novosPontos;
+	    try {
+	        novosPontos = Float.parseFloat(novosPontosStr);
+	    } catch (NumberFormatException ex) {
+	        JOptionPane.showMessageDialog(null, "Informe um valor numérico válido para os pontos", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "professor.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo de professores não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    StringBuilder sb = new StringBuilder();
+	    String linha = reader.readLine();
+	    boolean atualizado = false;
+
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        if (dados[0].equals(cpf)) {
+	            sb.append(cpf).append(";").append(novoNome).append(";").append(novaArea).append(";").append(novosPontos).append(";\r\n");
+	            atualizado = true;
+	        } else {
+	            sb.append(linha).append("\r\n");
+	        }
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    if (!atualizado) {
+	        JOptionPane.showMessageDialog(null, "Professor não encontrado para atualização.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+	    pw.write(sb.toString());
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Professor atualizado com sucesso!");
+
+	    tfProfessorCpf.setText("");
+	    tfProfessorNome.setText("");
+	    tfProfessorArea.setText("");
+	    tfProfessorPontos.setText("");
 	}
 
 	private void busca() throws IOException{

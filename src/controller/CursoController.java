@@ -53,7 +53,7 @@ public class CursoController implements ActionListener{
 		if(cmd.equals("Atualizar")) {
 			try {
 				atualizar();
-			}catch(IOException e1) {
+			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -67,14 +67,123 @@ public class CursoController implements ActionListener{
 		
 	}
 
-	private void remover() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void remover() throws IOException {
+	    String cod = tfCursoCod.getText();
+
+	    if (cod.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Informe o código do curso para remover", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "curso.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    StringBuilder sb = new StringBuilder();
+	    String linha = reader.readLine();
+	    boolean removido = false;
+
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        if (!dados[0].equals(cod)) {
+	            sb.append(linha).append("\r\n");
+	        } else {
+	            removido = true;
+	        }
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    if (!removido) {
+	        JOptionPane.showMessageDialog(null, "Curso não encontrado para remoção.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+	    pw.write(sb.toString());
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Curso removido com sucesso!");
+
+	    tfCursoCod.setText("");
+	    tfCursoNome.setText("");
+	    tfCursoArea.setText("");
+	    taCurso.setText("");
 	}
 
-	private void atualizar() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void atualizar() throws Exception {
+	    String cod = tfCursoCod.getText();
+	    String novoNome = tfCursoNome.getText();
+	    String novaArea = tfCursoArea.getText();
+
+	    if (cod.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Informe o código do curso para atualizar", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "curso.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo de cursos não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    StringBuilder sb = new StringBuilder();
+	    String linha = reader.readLine();
+	    boolean atualizado = false;
+
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        if (dados[0].equals(cod)) {
+	            sb.append(cod).append(";").append(novoNome).append(";").append(novaArea).append(";\r\n");
+	            atualizado = true;
+	        } else {
+	            sb.append(linha).append("\r\n");
+	        }
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    if (!atualizado) {
+	        JOptionPane.showMessageDialog(null, "Curso não encontrado para atualização.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+	    pw.write(sb.toString());
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Curso atualizado com sucesso!");
+
+	    tfCursoCod.setText("");
+	    tfCursoNome.setText("");
+	    tfCursoArea.setText("");
+	    taCurso.setText("");
 	}
 
 	private void busca() throws IOException{

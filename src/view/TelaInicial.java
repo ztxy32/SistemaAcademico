@@ -226,7 +226,7 @@ public class TelaInicial extends JFrame {
 		
 		JButton btnDisciplinaRemover = new JButton("Remover");
 		btnDisciplinaRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaRemover.setBounds(424, 104, 117, 25);
+		btnDisciplinaRemover.setBounds(424, 162, 117, 25);
 		tabDisciplina.add(btnDisciplinaRemover);
 		
 		JPanel tabCurso = new JPanel();
@@ -372,6 +372,11 @@ public class TelaInicial extends JFrame {
 			tfDisciplinaCurso, 
 			taDisciplina
 		);
+		
+		JButton btnDisciplinaAtualizar = new JButton("Atualizar");
+		btnDisciplinaAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
+		btnDisciplinaAtualizar.setBounds(424, 104, 117, 25);
+		tabDisciplina.add(btnDisciplinaAtualizar);
 		ProfessorController professorController = new ProfessorController(
 			tfProfessorCpf, 
 			tfProfessorNome, 
@@ -387,12 +392,23 @@ public class TelaInicial extends JFrame {
 		
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
+		btnDisciplinaRemover.addActionListener(disciplinaController);
+		btnDisciplinaAtualizar.addActionListener(disciplinaController);
+		
 		btnInscricaoCadastrar.addActionListener(inscricaoController);
 		btnInscricaoBuscar.addActionListener(inscricaoController);
-		btnCursoCadastrar.addActionListener(cursoController);
-		btnCursoPesquisar.addActionListener(cursoController);
-		btnProfessorCadastrar.addActionListener(professorController);
 		btnInscricaoRemover.addActionListener(inscricaoController);
 		btnInscricaoAtualizar.addActionListener(inscricaoController);
+		
+		btnCursoCadastrar.addActionListener(cursoController);
+		btnCursoPesquisar.addActionListener(cursoController);
+		btnCursoRemover.addActionListener(cursoController);
+		btnCursoAtualizar.addActionListener(cursoController);
+		
+		btnProfessorCadastrar.addActionListener(professorController);
+		btnProfessorBuscar.addActionListener(professorController);
+		btnProfessorAtualizar.addActionListener(professorController);
+		btnProfessorRemover.addActionListener(professorController);
+		
 	}
 }
