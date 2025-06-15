@@ -241,7 +241,6 @@ public class InscricaoController implements ActionListener{
 		
 		
 		int listSize = inscricoes.size();
-		
 		StringBuffer buffer = new StringBuffer();
 		if(listSize > 0) {
 			for(int i = 0; i < listSize; i++) {
@@ -340,7 +339,6 @@ public class InscricaoController implements ActionListener{
 					inscricao.cpfProfessor = vetLinha[0];
 					inscricao.codDisciplina = vetLinha[1];
 					inscricao.codProcesso = vetLinha[2];
-					break;
 				}
 				linha = buffer.readLine();
 			}

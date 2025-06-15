@@ -73,7 +73,7 @@ public class DisciplinaController implements ActionListener{
 		
 		disciplina = buscaDisciplina(disciplina);
 		if(disciplina.nome != null) {
-			taDisciplina.setText("Codigo: "+disciplina.cod+" Nome: "+disciplina.nome);
+			taDisciplina.setText("Codigo: "+disciplina.cod+" Disciplina: "+disciplina.nome+" - Curso "+disciplina.curso+" "+disciplina.diaSemana+" a partir das "+disciplina.horarioInicial);
 		}else {
 			taDisciplina.setText("Disciplina não encontrada");
 		}
@@ -94,6 +94,10 @@ public class DisciplinaController implements ActionListener{
 				String[] vetLinha = linha.split(";");
 				if(vetLinha[0].equals(String.valueOf(disciplina.cod))) {
 					disciplina.nome = vetLinha[1];
+					disciplina.diaSemana = vetLinha[2];
+					disciplina.horarioInicial = vetLinha[3];
+					disciplina.qtHoras = vetLinha[4];
+					disciplina.curso = vetLinha[5];
 					break;
 				}
 				linha = buffer.readLine();
