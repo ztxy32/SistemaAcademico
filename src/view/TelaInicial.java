@@ -144,12 +144,12 @@ public class TelaInicial extends JFrame {
 		
 		JButton btnDisciplinaCadastrar = new JButton("Cadastrar");
 		btnDisciplinaCadastrar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaCadastrar.setBounds(424, 14, 117, 25);
+		btnDisciplinaCadastrar.setBounds(458, 15, 117, 25);
 		tabDisciplina.add(btnDisciplinaCadastrar);
 		
 		JButton btnDisciplinaBuscar = new JButton("Buscar");
 		btnDisciplinaBuscar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaBuscar.setBounds(424, 61, 117, 25);
+		btnDisciplinaBuscar.setBounds(458, 45, 117, 25);
 		tabDisciplina.add(btnDisciplinaBuscar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -226,7 +226,7 @@ public class TelaInicial extends JFrame {
 		
 		JButton btnDisciplinaRemover = new JButton("Remover");
 		btnDisciplinaRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaRemover.setBounds(424, 162, 117, 25);
+		btnDisciplinaRemover.setBounds(458, 105, 117, 25);
 		tabDisciplina.add(btnDisciplinaRemover);
 		
 		JPanel tabCurso = new JPanel();
@@ -375,7 +375,7 @@ public class TelaInicial extends JFrame {
 		
 		JButton btnDisciplinaAtualizar = new JButton("Atualizar");
 		btnDisciplinaAtualizar.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
-		btnDisciplinaAtualizar.setBounds(424, 104, 117, 25);
+		btnDisciplinaAtualizar.setBounds(458, 75, 117, 25);
 		tabDisciplina.add(btnDisciplinaAtualizar);
 		ProfessorController professorController = new ProfessorController(
 			tfProfessorCpf, 
