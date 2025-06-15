@@ -76,32 +76,32 @@ public class TelaInicial extends JFrame {
 		tabbedPane.addTab("Disciplina", null, tabDisciplina, "Cadastro de disciplina");
 		tabDisciplina.setLayout(null);
 		
-		JLabel lblDisciplinaCod = new JLabel("Código da disciplina");
+		JLabel lblDisciplinaCod = new JLabel("Código da disciplina:");
 		lblDisciplinaCod.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaCod.setBounds(12, 10, 150, 33);
 		tabDisciplina.add(lblDisciplinaCod);
 		
-		JLabel lblDisciplinaNome = new JLabel("Nome da disciplina");
+		JLabel lblDisciplinaNome = new JLabel("Nome da disciplina:");
 		lblDisciplinaNome.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaNome.setBounds(12, 40, 150, 33);
 		tabDisciplina.add(lblDisciplinaNome);
 		
-		JLabel lblDisciplinaDiaSemana = new JLabel("Dia da semana");
+		JLabel lblDisciplinaDiaSemana = new JLabel("Dia da semana:");
 		lblDisciplinaDiaSemana.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaDiaSemana.setBounds(12, 70, 150, 33);
 		tabDisciplina.add(lblDisciplinaDiaSemana);
 		
-		JLabel lblDisciplinaHorarioInicio = new JLabel("Horário de inicio");
+		JLabel lblDisciplinaHorarioInicio = new JLabel("Horário de inicio:");
 		lblDisciplinaHorarioInicio.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaHorarioInicio.setBounds(12, 100, 150, 33);
 		tabDisciplina.add(lblDisciplinaHorarioInicio);
 		
-		JLabel lblDisciplinaQtHoras = new JLabel("Quantidade de horas");
+		JLabel lblDisciplinaQtHoras = new JLabel("Quantidade de horas:");
 		lblDisciplinaQtHoras.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaQtHoras.setBounds(12, 130, 150, 33);
 		tabDisciplina.add(lblDisciplinaQtHoras);
 		
-		JLabel lblDisciplinaCurso = new JLabel("Curso");
+		JLabel lblDisciplinaCurso = new JLabel("Curso:");
 		lblDisciplinaCurso.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblDisciplinaCurso.setBounds(12, 160, 150, 33);
 		tabDisciplina.add(lblDisciplinaCurso);
@@ -299,7 +299,7 @@ public class TelaInicial extends JFrame {
 		lblCpfDoProfessor.setBounds(12, 15, 200, 25);
 		tabInscricao.add(lblCpfDoProfessor);
 		
-		JLabel lblCdigoDaDisciplina = new JLabel("Código da disciplina");
+		JLabel lblCdigoDaDisciplina = new JLabel("Código da disciplina:");
 		lblCdigoDaDisciplina.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		lblCdigoDaDisciplina.setBounds(12, 45, 200, 25);
 		tabInscricao.add(lblCdigoDaDisciplina);
@@ -343,24 +343,54 @@ public class TelaInicial extends JFrame {
 		btnInscricaoRemover.setFont(new Font("Adwaita Sans", Font.BOLD, 14));
 		btnInscricaoRemover.setBounds(458, 105, 117, 25);
 		tabInscricao.add(btnInscricaoRemover);
+
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(12, 152, 587, 252);
+		tabProfessor.add(scrollPane_2);
 		
+		JTextArea taProfessor = new JTextArea();
+		scrollPane_2.setViewportView(taProfessor);
+		
+		
+		
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(12, 148, 587, 256);
+		tabInscricao.add(scrollPane_3);
+		
+		JTextArea taInscricao = new JTextArea();
+		scrollPane_3.setViewportView(taInscricao);
+		
+		
+		CursoController cursoController = new CursoController(tfCursoCod, tfCursoNome, tfCursoArea, taCurso);
 		DisciplinaController disciplinaController = new DisciplinaController(
-				tfDisciplinaCod, 
-				tfDisciplinNome, 
-				tfDisciplinaDiaSemana, 
-				tfDisciplinaHorarioInicial, 
-				tfDisciplinaQtHoras, 
-				tfDisciplinaCurso, 
-				taDisciplina
-			);
-			//ProfessorController professorController = new ProfessorController(tfProfessorCpf, tfProfessorNome, tfProfessorArea, tfProfessorPontos);
-			CursoController cursoController = new CursoController(tfCursoCod, tfCursoNome, tfCursoArea);
-			InscricaoController inscricaoController = new InscricaoController(tfInscricaoCpfProfessor, tfInscricaoCodDisciplina, tfInscricaoCodProcesso);
-			
+			tfDisciplinaCod, 
+			tfDisciplinNome, 
+			tfDisciplinaDiaSemana, 
+			tfDisciplinaHorarioInicial, 
+			tfDisciplinaQtHoras, 
+			tfDisciplinaCurso, 
+			taDisciplina
+		);
+		ProfessorController professorController = new ProfessorController(
+			tfProfessorCpf, 
+			tfProfessorNome, 
+			tfProfessorArea, 
+			tfProfessorPontos
+		);
+		InscricaoController inscricaoController = new InscricaoController(
+			tfInscricaoCpfProfessor, 
+			tfInscricaoCodDisciplina, 
+			tfInscricaoCodProcesso, 
+			taInscricao
+		);
 		
 		btnDisciplinaCadastrar.addActionListener(disciplinaController);
 		btnDisciplinaBuscar.addActionListener(disciplinaController);
 		btnInscricaoCadastrar.addActionListener(inscricaoController);
+		btnInscricaoBuscar.addActionListener(inscricaoController);
 		btnCursoCadastrar.addActionListener(cursoController);
+		btnCursoPesquisar.addActionListener(cursoController);
+		btnProfessorCadastrar.addActionListener(professorController);
 	}
 }
