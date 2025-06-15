@@ -1,34 +1,33 @@
 package model.estrutura;
 
-public class Node<T> {
-    private T element;
-    private Node<T> next;
+public class Node<T>{
+    private Node<T> proximo;
+    private T elemento;
 
-    public Node(T element){
-        this.element = element;
-        this.next = null;
+    public Node(T elemento){
+        this.elemento = elemento;
     }
-    public Node(T element, Node<T> next){
-        this.element = element;
-        this.next = next;
+    public Node(T elemento, Node<T> proximo){
+        this.elemento = elemento;
+        this.proximo = proximo;
     }
-    
-    public T getElement() {
-        return element;
+
+    public void setProximo(Node<T> proximo){
+        this.proximo = proximo;
     }
-    public Node<T> getNext() {
-        return next;
+    public Node<T> getProximo(){
+        return this.proximo;
     }
-    public void setElement(T element) {
-        this.element = element;
+
+    public void setElemento(T elemento){
+        this.elemento = elemento;
     }
-    public void setNext(Node<T> next) {
-        this.next = next;
+    public T getElemento(){
+        return this.elemento;
     }
 
     @Override
-    public String toString() {
-        return element + "] -> [" + next;
-    }   
-    
+    public String toString(){
+        return elemento.toString();
+    }
 }

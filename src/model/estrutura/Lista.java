@@ -42,6 +42,7 @@ public class Lista<T> implements ILista<T>{
     public void addLast(T valor) throws Exception {
         if(isEmpty()){
             addFirst(valor);
+            return;
         }
 
         int tamanho = size();
