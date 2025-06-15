@@ -392,5 +392,6 @@ public class TelaInicial extends JFrame {
 		btnCursoCadastrar.addActionListener(cursoController);
 		btnCursoPesquisar.addActionListener(cursoController);
 		btnProfessorCadastrar.addActionListener(professorController);
+		btnInscricaoRemover.addActionListener(inscricaoController);
 	}
 }

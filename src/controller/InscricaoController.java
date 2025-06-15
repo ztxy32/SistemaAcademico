@@ -22,12 +22,16 @@ public class InscricaoController implements ActionListener{
 	private JTextField  tfInscricaoCodProcesso;
 	private JTextArea taInscricao;
 	
-	public InscricaoController(JTextField tfInscricaoCpfProfessor, JTextField tfInscricaoCodDisciplina, JTextField tfInscricaoCodProcesso, JTextArea taInscricao) {
-		super();
-		this.tfInscricaoCpfProfessor = tfInscricaoCpfProfessor;
-		this.tfInscricaoCodDisciplina = tfInscricaoCodDisciplina;
-		this.tfInscricaoCodProcesso = tfInscricaoCodProcesso;
-		this.taInscricao = taInscricao;
+	public InscricaoController(
+		JTextField tfInscricaoCpfProfessor, 
+		JTextField tfInscricaoCodDisciplina, 
+		JTextField tfInscricaoCodProcesso, 
+		JTextArea taInscricao) {
+			super();
+			this.tfInscricaoCpfProfessor = tfInscricaoCpfProfessor;
+			this.tfInscricaoCodDisciplina = tfInscricaoCodDisciplina;
+			this.tfInscricaoCodProcesso = tfInscricaoCodProcesso;
+			this.taInscricao = taInscricao;
 	}
 
 	@Override
@@ -58,17 +62,87 @@ public class InscricaoController implements ActionListener{
 		if(cmd.equals("Remover")) {
 			try {
 				remover();
-			}catch(IOException e1) {
+			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 
 	}
 
-	private void remover() throws IOException{
-		// TODO Auto-generated method stub
-		
+	private void remover() throws Exception {
+	    String cpf = tfInscricaoCpfProfessor.getText();
+	    String codDisc = tfInscricaoCodDisciplina.getText();
+	    String codProc = tfInscricaoCodProcesso.getText();
+
+	    if (cpf.isEmpty()) {
+	    	JOptionPane.showMessageDialog(null, "Informe o cpf para remover", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+	    File arq = new File(path, "inscricoes.csv");
+
+	    if (!arq.exists()) {
+	        JOptionPane.showMessageDialog(null, "Arquivo de inscrições não encontrado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    FileInputStream fis = new FileInputStream(arq);
+	    InputStreamReader isr = new InputStreamReader(fis);
+	    BufferedReader reader = new BufferedReader(isr);
+
+	    Lista<Inscricao> listaFinal = new Lista<>();
+	    String linha = reader.readLine();
+
+	    while (linha != null) {
+	        String[] dados = linha.split(";");
+	        Inscricao insc = new Inscricao();
+	        insc.cpfProfessor = dados[0];
+	        insc.codDisciplina = dados[1];
+	        insc.codProcesso = dados[2];
+
+	        boolean remover = false;
+
+	        if (!cpf.isEmpty() && cpf.equals(insc.cpfProfessor)) {
+	            remover = true;
+	        } else if (!codDisc.isEmpty() && codDisc.equals(insc.codDisciplina)) {
+	            remover = true;
+	        } else if (!codProc.isEmpty() && codProc.equals(insc.codProcesso)) {
+	            remover = true;
+	        }
+
+	        if (!remover) {
+	            listaFinal.addLast(insc);
+	        }
+
+	        linha = reader.readLine();
+	    }
+
+	    reader.close();
+	    isr.close();
+	    fis.close();
+
+	    FileWriter fw = new FileWriter(arq, false);
+	    PrintWriter pw = new PrintWriter(fw);
+
+	    int tamanho = listaFinal.size();
+	    for (int i = 0; i < tamanho; i++) {
+	        Inscricao insc = (Inscricao) listaFinal.getPosicao(i);
+	        pw.write(insc.cpfProfessor + ";" + insc.codDisciplina + ";" + insc.codProcesso+";"+"\r\n");
+	    }
+
+	    pw.flush();
+	    pw.close();
+	    fw.close();
+
+	    JOptionPane.showMessageDialog(null, "Inscrição removida com sucesso!");
+
+	    tfInscricaoCpfProfessor.setText("");
+	    tfInscricaoCodDisciplina.setText("");
+	    tfInscricaoCodProcesso.setText("");
+	    taInscricao.setText("");
 	}
+
 
 	private void atualizar() throws IOException{
 		// TODO Auto-generated method stub
@@ -107,8 +181,6 @@ public class InscricaoController implements ActionListener{
 			}
 			taInscricao.setText(buffer.toString());
 			
-		}else {
-			JOptionPane.showMessageDialog(null, "Nenhum processo encontrado", "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		tfInscricaoCpfProfessor.setText("");
