@@ -2,8 +2,8 @@ package model;
 
 public class Inscricao {
 	public String cpfProfessor;
-	public int codDisciplina;
-	public int codProcesso;
+	public String codDisciplina;
+	public String codProcesso;
 	
 	@Override
 	public String toString() {

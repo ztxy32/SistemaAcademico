@@ -20,12 +20,16 @@ public class CursoController implements ActionListener{
 	private JTextField tfCursoArea;
 	private JTextArea taCurso;
 	
-	public CursoController(JTextField tfCursoCod, JTextField tfCursoNome, JTextField tfCursoArea, JTextArea taCurso) {
-		super();
-		this.tfCursoCod = tfCursoCod;
-		this.tfCursoNome = tfCursoNome;
-		this.tfCursoArea = tfCursoArea;
-		this.taCurso = taCurso;
+	public CursoController(
+		JTextField tfCursoCod, 
+		JTextField tfCursoNome, 
+		JTextField tfCursoArea, 
+		JTextArea taCurso) {
+			super();
+			this.tfCursoCod = tfCursoCod;
+			this.tfCursoNome = tfCursoNome;
+			this.tfCursoArea = tfCursoArea;
+			this.taCurso = taCurso;
 	}
 
 	@Override
@@ -75,7 +79,7 @@ public class CursoController implements ActionListener{
 
 	private void busca() throws IOException{
 		Curso curso = new Curso();		
-		curso.cod = Integer.parseInt(tfCursoCod.getText());
+		curso.cod = tfCursoCod.getText();
 		
 		curso = buscarCurso(curso);
 		if(curso.nome != null) {
@@ -111,7 +115,7 @@ public class CursoController implements ActionListener{
 
 	private void cadastro() throws IOException{
 		Curso curso = new Curso();
-		curso.cod = Integer.parseInt(tfCursoCod.getText());
+		curso.cod = tfCursoCod.getText();
 		curso.nome = tfCursoNome.getText();
 		curso.area = tfCursoArea.getText();
 		

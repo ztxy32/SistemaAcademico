@@ -1,11 +1,11 @@
 package model;
 
 public class Disciplina {
-	public int cod;
+	public String cod;
 	public String nome;
 	public String diaSemana;
 	public String horarioInicial;
-	public int qtHoras;
+	public String qtHoras;
 	public String curso;
 	
 	

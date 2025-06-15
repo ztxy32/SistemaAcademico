@@ -27,9 +27,14 @@ public class DisciplinaController implements ActionListener{
 	
 	
 	public DisciplinaController(
-			JTextField tfDisciplinaCod, JTextField tfDisciplinNome,
-			JTextField tfDisciplinaDiaSemana, JTextField tfDisciplinaHorarioInicial, JTextField tfDisciplinaQtHoras,
-			JTextField tfDisciplinaCurso, JTextArea taDisciplina) {
+		JTextField tfDisciplinaCod, 
+		JTextField tfDisciplinNome,
+		JTextField tfDisciplinaDiaSemana, 
+		JTextField tfDisciplinaHorarioInicial, 
+		JTextField tfDisciplinaQtHoras,
+		JTextField tfDisciplinaCurso, 
+		JTextArea taDisciplina
+	) {
 		super();
 		this.tfDisciplinaCod = tfDisciplinaCod;
 		this.tfDisciplinNome = tfDisciplinNome;
@@ -39,7 +44,6 @@ public class DisciplinaController implements ActionListener{
 		this.tfDisciplinaCurso = tfDisciplinaCurso;
 		this.taDisciplina = taDisciplina;
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -62,11 +66,10 @@ public class DisciplinaController implements ActionListener{
 		
 	}
 
-
 	private void busca() throws IOException {
 		Disciplina disciplina = new Disciplina();
 		
-		disciplina.cod = Integer.parseInt(tfDisciplinaCod.getText());
+		disciplina.cod = tfDisciplinaCod.getText();
 		
 		disciplina = buscaDisciplina(disciplina);
 		if(disciplina.nome != null) {
@@ -76,7 +79,6 @@ public class DisciplinaController implements ActionListener{
 		}
 		
 	}
-
 
 	private Disciplina buscaDisciplina(Disciplina disciplina) throws IOException {
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
@@ -104,17 +106,16 @@ public class DisciplinaController implements ActionListener{
 		return disciplina;
 	}
 
-
 	private void cadastro() throws IOException {
 		Disciplina disciplina = new Disciplina();
 		
 		//capturar input
 		
-		disciplina.cod = Integer.parseInt(tfDisciplinaCod.getText());
+		disciplina.cod = tfDisciplinaCod.getText();
 		disciplina.nome = tfDisciplinNome.getText();
 		disciplina.diaSemana = tfDisciplinaDiaSemana.getText();
 		disciplina.horarioInicial = tfDisciplinaHorarioInicial.getText();
-		disciplina.qtHoras = Integer.parseInt(tfDisciplinaQtHoras.getText());
+		disciplina.qtHoras = tfDisciplinaQtHoras.getText();
 		disciplina.curso = tfDisciplinaCurso.getText();
 		
 		handleCadastrarDisciplina(disciplina.toString());
@@ -128,7 +129,6 @@ public class DisciplinaController implements ActionListener{
 		tfDisciplinaQtHoras.setText("");
 		tfDisciplinaCurso.setText("");
 	}
-
 
 	private void handleCadastrarDisciplina(String csvDisciplina) throws IOException{
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
@@ -153,9 +153,6 @@ public class DisciplinaController implements ActionListener{
 		pw.close();
 		fw.close();
 		
-		JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso!");
-		
+		JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso!");		
 	}
-	
-	
 }
