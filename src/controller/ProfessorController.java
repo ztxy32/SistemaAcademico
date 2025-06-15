@@ -20,12 +20,17 @@ public class ProfessorController implements ActionListener{
 	private JTextField tfProfessorArea;
 	private JTextField tfProfessorPontos;
 	
-	public ProfessorController(JTextField tfProfessorCpf, JTextField tfProfessorNome, JTextField tfProfessorArea, JTextField tfProfessorPontos) {
-		super();
-		this.tfProfessorCpf = tfProfessorCpf;
-		this.tfProfessorNome = tfProfessorNome;
-		this.tfProfessorArea = tfProfessorArea;
-		this.tfProfessorPontos = tfProfessorPontos;
+	public ProfessorController(
+		JTextField tfProfessorCpf, 
+		JTextField tfProfessorNome, 
+		JTextField tfProfessorArea, 
+		JTextField tfProfessorPontos
+		) {
+			super();
+			this.tfProfessorCpf = tfProfessorCpf;
+			this.tfProfessorNome = tfProfessorNome;
+			this.tfProfessorArea = tfProfessorArea;
+			this.tfProfessorPontos = tfProfessorPontos;
 	}
 
 	@Override
